@@ -8,7 +8,7 @@ orbs:
 executors:
   openjdk11:
     docker:
-      - image: cimg/openjdk:11
+      - image: cimg/openjdk:11.0.16
 
 
 workflows:
