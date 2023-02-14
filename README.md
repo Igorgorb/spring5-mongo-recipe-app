@@ -1,5 +1,6 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Igorgorb/spring5-mongo-recipe-app/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Igorgorb/spring5-mongo-recipe-app/tree/master)
 
+[![codecov](https://codecov.io/gh/Igorgorb/spring5-mongo-recipe-app/branch/master/graph/badge.svg?token=RA1ZM83B4G)](https://codecov.io/gh/Igorgorb/spring5-mongo-recipe-app)
 My Badges
 
 [![CircleCI](https://circleci.com/gh/springframeworkguru/spring5-mongo-recipe-app.svg?style=svg)](https://circleci.com/gh/springframeworkguru/spring5-mongo-recipe-app)
