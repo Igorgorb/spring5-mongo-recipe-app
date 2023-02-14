@@ -1,13 +1,28 @@
-# Java Maven CircleCI 2.0 configuration file
+version: 2.1
 
-# Check https://circleci.com/docs/2.0/language-java/ for more details
-#
-version: 2
-jobs:
-  build:
+orbs:
+  gradle: circleci/gradle@3.0.0
+
+
+
+executors:
+  openjdk11:
     docker:
-      # specify the version you desire here
-      - image: circleci/openjdk:8-jdk
+      - image: cimg/openjdk:11
+
+
+workflows:
+  verify:  # This is the name of the workflow, feel free to change it to better match your workflow.
+    # Inside the workflow, you define the jobs you want to run.
+    # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
+    jobs:
+      - build-and-test
+
+
+jobs:
+  build-and-test:  # This is the name of the job, feel free to change it to better match what you're trying to do!
+    executor: openjdk11
+
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -54,6 +69,6 @@ jobs:
       - store_artifacts:
           path: ~/junit
 
-      - run:
-          name: Send to CodeCov
-          command: bash <(curl -s https://codecov.io/bash)
+#      - run:
+#          name: Send to CodeCov
+#          command: bash <(curl -s https://codecov.io/bash)
