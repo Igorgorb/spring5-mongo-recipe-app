@@ -1,7 +1,10 @@
 version: 2.1
 
 orbs:
-  gradle: circleci/gradle@3.0.0
+  gradle: circleci/gradle@3.0.0  
+  codecov: codecov/codecov@3.2.4
+
+
 
 
 
@@ -35,6 +38,7 @@ jobs:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
       TERM: dumb
+      CODECOV_TOKEN: 319edf45-fd5e-4109-bbee-8c6c594a0068
 
     steps:
       - checkout
@@ -69,6 +73,4 @@ jobs:
       - store_artifacts:
           path: ~/junit
 
-#      - run:
-#          name: Send to CodeCov
-#          command: bash <(curl -s https://codecov.io/bash)
+      - codecov/upload
