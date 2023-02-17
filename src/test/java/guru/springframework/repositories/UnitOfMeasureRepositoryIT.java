@@ -1,13 +1,12 @@
 package guru.springframework.repositories;
 
+import guru.springframework.bootstrap.RecipeBootstrap;
 import guru.springframework.domain.UnitOfMeasure;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-
 
 import java.util.Optional;
 
@@ -16,32 +15,41 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * Created by jt on 6/17/17.
  */
-@Disabled
-
 @DataMongoTest
 public class UnitOfMeasureRepositoryIT {
 
-    @Autowired
-    UnitOfMeasureRepository unitOfMeasureRepository;
+  @Autowired
+  UnitOfMeasureRepository unitOfMeasureRepository;
+  @Autowired
+  CategoryRepository categoryRepository;
+  @Autowired
+  RecipeRepository recipeRepository;
 
-    @BeforeEach
-    public void setUp() throws Exception {
-    }
+  @BeforeEach
+  public void setUp() throws Exception {
+    recipeRepository.deleteAll();
+    unitOfMeasureRepository.deleteAll();
+    categoryRepository.deleteAll();
 
-    @Test
-    public void findByDescription() throws Exception {
+    RecipeBootstrap recipeBootstrap = new RecipeBootstrap(categoryRepository, recipeRepository, unitOfMeasureRepository);
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
+    recipeBootstrap.onApplicationEvent(null);
+  }
 
-        assertEquals("Teaspoon", uomOptional.get().getDescription());
-    }
+  @Test
+  public void findByDescription() throws Exception {
 
-    @Test
-    public void findByDescriptionCup() throws Exception {
+    Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 
-        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
+    assertEquals("Teaspoon", uomOptional.get().getDescription());
+  }
 
-        assertEquals("Cup", uomOptional.get().getDescription());
-    }
+  @Test
+  public void findByDescriptionCup() throws Exception {
+
+    Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescription("Cup");
+
+    assertEquals("Cup", uomOptional.get().getDescription());
+  }
 
 }
